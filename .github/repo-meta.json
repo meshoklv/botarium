@@ -1,6 +1,6 @@
 {
   "name": "botarium",
-  "description": "A collection of 8 ready-to-run Telegram bots (voice summaries, tasks, reminders, image gen, booking, alerts) with one-command Docker Compose.",
+  "description": "A collection of 6 ready-to-run Telegram bots (voice summaries, tasks, image gen, booking, alerts) with one-command Docker Compose.",
   "homepage": "",
-  "topics": ["telegram-bot", "telegram", "python", "nodejs", "docker-compose", "openrouter", "llm", "whisper", "bot-collection", "self-hosted"]
+  "topics": ["telegram-bot", "telegram", "python", "docker-compose", "openrouter", "llm", "whisper", "bot-collection", "self-hosted"]
 }

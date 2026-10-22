@@ -42,12 +42,6 @@ services:
       timeout: 3s
       retries: 10
 
-  grumpy-reminder:
-    <<: *bot
-    build: ./bots/grumpy-reminder
-    env_file: [{path: ./bots/grumpy-reminder/.env, required: false}]
-    volumes: [grumpy-data:/data]
-
   banana-studio:
     <<: *bot
     build: ./bots/banana-studio
@@ -59,12 +53,6 @@ services:
     build: ./bots/salon-booking
     env_file: [{path: ./bots/salon-booking/.env, required: false}]
     volumes: [salon-data:/data]
-
-  chef-roast:
-    <<: *bot
-    build: ./bots/chef-roast
-    env_file: [{path: ./bots/chef-roast/.env, required: false}]
-    volumes: [chef-data:/data]
 
   air-alert-radar:
     <<: *bot
@@ -86,9 +74,7 @@ services:
 
 volumes:
   taskflow-pg:
-  grumpy-data:
   banana-data:
   salon-data:
-  chef-data:
   radar-data:
   health-data:
