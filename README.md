@@ -7,6 +7,7 @@
 <p align="center"><b>Eight ready-to-run Telegram bots in one repo - voice summaries, tasks, reminders, image generation, booking, alerts and health reports. One <code>docker compose</code> service per bot.</b></p>
 
 <p align="center">
+  <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/meshoklv/botarium/ci.yml?style=flat-square&label=CI">
   <img alt="License" src="https://img.shields.io/github/license/meshoklv/botarium?style=flat-square">
   <img alt="Python" src="https://img.shields.io/badge/python-3.12-3776AB?style=flat-square&logo=python&logoColor=white">
   <img alt="Node" src="https://img.shields.io/badge/node-22-339933?style=flat-square&logo=nodedotjs&logoColor=white">
