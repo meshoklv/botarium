@@ -1,0 +1,8 @@
+.env
+config.json
+*.db
+node_modules/
+__pycache__/
+*.pyc
+data/
+logs/

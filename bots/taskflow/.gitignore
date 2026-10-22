@@ -1,0 +1,10 @@
+.env
+whisper.cpp/
+models/
+__pycache__/
+*.pyc
+*.log
+logs/
+backup_*.json
+*.ogg
+*.wav

@@ -1,0 +1,94 @@
+# Botarium - one compose file, one service per bot.
+#
+#   1. cp bots/<bot>/.env.example bots/<bot>/.env   and fill it in
+#   2. docker compose up -d --build <service>        (e.g. voice-summarizer)
+#
+# Start only the bots you configured - a service without its .env will not work.
+# No ports are published: every bot talks to Telegram by long polling (outbound only).
+
+x-bot: &bot
+  restart: unless-stopped
+  init: true
+
+services:
+  voice-summarizer:
+    <<: *bot
+    build: ./bots/voice-summarizer
+    env_file: [{path: ./bots/voice-summarizer/.env, required: false}]
+
+  taskflow:
+    <<: *bot
+    build: ./bots/taskflow
+    env_file: [{path: ./bots/taskflow/.env, required: false}]
+    environment:
+      DATABASE_URL: postgresql://taskflow:${TASKFLOW_DB_PASSWORD:-taskflow-local}@taskflow-db:5432/taskflow
+    depends_on:
+      taskflow-db:
+        condition: service_healthy
+
+  taskflow-db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: taskflow
+      POSTGRES_PASSWORD: ${TASKFLOW_DB_PASSWORD:-taskflow-local}
+      POSTGRES_DB: taskflow
+    volumes:
+      - taskflow-pg:/var/lib/postgresql/data
+      - ./bots/taskflow/sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taskflow"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  grumpy-reminder:
+    <<: *bot
+    build: ./bots/grumpy-reminder
+    env_file: [{path: ./bots/grumpy-reminder/.env, required: false}]
+    volumes: [grumpy-data:/data]
+
+  banana-studio:
+    <<: *bot
+    build: ./bots/banana-studio
+    env_file: [{path: ./bots/banana-studio/.env, required: false}]
+    volumes: [banana-data:/data]
+
+  salon-booking:
+    <<: *bot
+    build: ./bots/salon-booking
+    env_file: [{path: ./bots/salon-booking/.env, required: false}]
+    volumes: [salon-data:/data]
+
+  chef-roast:
+    <<: *bot
+    build: ./bots/chef-roast
+    env_file: [{path: ./bots/chef-roast/.env, required: false}]
+    volumes: [chef-data:/data]
+
+  air-alert-radar:
+    <<: *bot
+    build: ./bots/air-alert-radar
+    env_file: [{path: ./bots/air-alert-radar/.env, required: false}]
+    volumes:
+      - radar-data:/data
+      - type: bind
+        source: ./bots/air-alert-radar/config.json   # cp config.example.json config.json
+        target: /app/config.json
+        read_only: true
+        bind: {create_host_path: false}
+
+  health-monitor:
+    <<: *bot
+    build: ./bots/health-monitor
+    env_file: [{path: ./bots/health-monitor/.env, required: false}]
+    volumes: [health-data:/data]
+
+volumes:
+  taskflow-pg:
+  grumpy-data:
+  banana-data:
+  salon-data:
+  chef-data:
+  radar-data:
+  health-data:

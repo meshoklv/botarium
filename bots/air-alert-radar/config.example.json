@@ -1,0 +1,28 @@
+{
+  "bot_token": "PUT_BOT_TOKEN_FROM_BOTFATHER_HERE",
+  "admin_id": 123456789,
+
+  "home_label": "Khimki / Zelenograd (example - replace with your area)",
+  "home_lat": 55.8970,
+  "home_lon": 37.4296,
+  "red_radius_km": 15,
+  "orange_radius_km": 50,
+  "red_patterns": ["химк", "зеленоград", "сходн"],
+  "orange_places": {
+    "Красногорск": "красногорск",
+    "Мытищи": "мытищ",
+    "Долгопрудный": "долгопрудн",
+    "Лобня": "лобн"
+  },
+
+  "region_label": "Московская область",
+  "region_patterns": "московск\\S*\\s+област|подмосковь|московский регион",
+  "capital_label": "Москва",
+  "capital_pattern": "москв",
+
+  "tme_channels": ["radar_moscoww", "Radar_Moscow_99"],
+  "bplarussia_category": 13,
+  "poll_radar_map_sec": 20,
+  "poll_bplarussia_sec": 45,
+  "poll_tme_sec": 75
+}

@@ -1,0 +1,6 @@
+config.json
+state.db
+state.db-journal
+__pycache__/
+*.pyc
+*.log
